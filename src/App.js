@@ -12,11 +12,11 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn Jenkins on Udemy
+          Learn Jenkins on Udemy - Click here
         </a>
       </header>
       <p>
-          Application version: 2 <br />
+          Application version: 1 <br />
           Commit version: {process.env.REACT_APP_GIT_HASH || "unknown"}
       </p>
     </div>
