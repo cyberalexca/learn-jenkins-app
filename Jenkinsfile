@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    environment {
+        GIT_HASH = GIT_COMMIT.take(8)
+    }
+
     stages {
         stage('Build') {
             agent {
@@ -12,6 +16,7 @@ pipeline {
 
             steps {
                 sh '''
+                    echo $GIT_HASH
                     ls -la
                     node --version
                     npm --version
@@ -31,7 +36,6 @@ pipeline {
             }
 
             steps {
-                echo "${GIT_COMMIT[0..7]}"
                 sh '''
                     test -f build/index.html
                     npm run test
