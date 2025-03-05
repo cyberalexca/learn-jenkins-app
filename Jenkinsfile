@@ -40,6 +40,7 @@ pipeline {
                     test -f build/index.html
                     npm run test
                 '''
+                
             }
         }
     }
