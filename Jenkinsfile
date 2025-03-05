@@ -43,6 +43,11 @@ pipeline {
                         '''
                         
                     }
+                    post {
+                        always {
+                            junit 'jest-results/junit.xml'
+                        }
+                    }
                 }
                 stage("E2E") {
                     agent {
@@ -59,18 +64,22 @@ pipeline {
                             sleep 10
                             npx playwright test --reporter=html
                         '''
-                        
+                    }
+                    post {
+                        always {
+                            publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, icon: '', keepAll: true, reportDir: 'playwright-report', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: '', useWrapperFileDirectly: true])
+                        }
                     }
                 }
             }
         }
     }
 
-    post {
-        always {
-            junit 'jest-results/junit.xml'
-            // archiveArtifacts artifacts: 'build/'
-            publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, icon: '', keepAll: true, reportDir: 'playwright-report', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: '', useWrapperFileDirectly: true])
-        }
-    }
+    // post {
+    //     always {
+    //         junit 'jest-results/junit.xml'
+    //         // archiveArtifacts artifacts: 'build/'
+    //         publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, icon: '', keepAll: true, reportDir: 'playwright-report', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: '', useWrapperFileDirectly: true])
+    //     }
+    // }
 }
