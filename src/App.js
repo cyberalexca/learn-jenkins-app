@@ -17,6 +17,7 @@ function App() {
       </header>
       <p>
           Application version: 1
+          Commit version: {process.env.REACT_APP_GIT_HASH || "unknown"}
       </p>
     </div>
   );

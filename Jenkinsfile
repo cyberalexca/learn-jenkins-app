@@ -2,7 +2,8 @@ pipeline {
     agent any
 
     environment {
-        GIT_HASH = GIT_COMMIT.take(7)
+        // GIT_HASH = GIT_COMMIT.take(7)
+        GIT_HASH = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim().take(7)
         NETLIFY_SITE_ID = "fe19abea-7574-467e-a119-ab352269de48"
         NETLIFY_AUTH_TOKEN = credentials('netlify-token')
     }
@@ -16,14 +17,10 @@ pipeline {
                 }
             }
             steps {
+                sh "echo 'REACT_APP_GIT_HASH=${GIT_HASH}' > .env"
                 sh '''
-                    echo $GIT_HASH
-                    ls -la
-                    node --version
-                    npm --version
                     npm ci
                     npm run build
-                    ls -la
                 '''
             }
         }
@@ -88,6 +85,7 @@ pipeline {
                     npm install netlify-cli
                     node_modules/.bin/netlify --version
                     node_modules/.bin/netlify status
+                    # node_modules/.bin/netlify deploy --prod --site $NETLIFY_SITE_ID --auth $NETLIFY_AUTH_TOKEN --
                 '''
             }
         }        
