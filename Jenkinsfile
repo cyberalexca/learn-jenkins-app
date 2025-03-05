@@ -3,6 +3,7 @@ pipeline {
 
     environment {
         GIT_HASH = GIT_COMMIT.take(8)
+        NETLIFY_SITE_ID = "fe19abea-7574-467e-a119-ab352269de48"
     }
 
     stages {
