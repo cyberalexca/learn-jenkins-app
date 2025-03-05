@@ -31,6 +31,7 @@ pipeline {
             }
 
             steps {
+                echo "${GIT_REVISION,length=6}"
                 sh '''
                     test -f build/index.html
                     npm run test
