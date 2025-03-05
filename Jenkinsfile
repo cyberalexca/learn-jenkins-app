@@ -13,7 +13,6 @@ pipeline {
                     reuseNode true
                 }
             }
-
             steps {
                 sh '''
                     echo $GIT_HASH
@@ -26,7 +25,6 @@ pipeline {
                 '''
             }
         }
-
         stage("Test") {
             agent {
                 docker {
@@ -42,6 +40,12 @@ pipeline {
                 '''
                 
             }
+        }
+    }
+
+    post {
+        always {
+            junit 'test-results/junit.xml'
         }
     }
 }
