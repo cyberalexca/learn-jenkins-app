@@ -2,8 +2,9 @@ pipeline {
     agent any
 
     environment {
-        GIT_HASH = GIT_COMMIT.take(8)
+        GIT_HASH = GIT_COMMIT.take(7)
         NETLIFY_SITE_ID = "fe19abea-7574-467e-a119-ab352269de48"
+        NETLIFY_AUTH_TOKEN = credentials('netlify-token')
     }
 
     stages {
@@ -86,6 +87,7 @@ pipeline {
                 sh '''
                     npm install netlify-cli
                     node_modules/.bin/netlify --version
+                    node_modules/.bin/netlify status
                 '''
             }
         }        
