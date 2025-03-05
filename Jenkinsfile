@@ -11,6 +11,7 @@ pipeline {
             }
 
             steps {
+                cleanWs()
                 echo "Without Docker"
                 sh '''
                     ls -la
