@@ -98,6 +98,9 @@ pipeline {
                 }
             }
             steps {
+                timeout(time: 30, unit: 'SECONDS') {
+                    input cancel: 'No, please', message: 'Deploy to production?', ok: 'Yes, sure'
+                }
                 sh '''
                     npm install netlify-cli
                     node_modules/.bin/netlify --version
