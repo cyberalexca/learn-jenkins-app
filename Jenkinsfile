@@ -85,7 +85,7 @@ pipeline {
                     npm install netlify-cli
                     node_modules/.bin/netlify --version
                     node_modules/.bin/netlify status
-                    node_modules/.bin/netlify deploy --dir build
+                    node_modules/.bin/netlify deploy --dir build --message "Deployed from Jenkins commmit ${GIT_HASH}"
                 '''
             }
         }
@@ -105,7 +105,7 @@ pipeline {
                     npm install netlify-cli
                     node_modules/.bin/netlify --version
                     node_modules/.bin/netlify status
-                    node_modules/.bin/netlify deploy --prod --dir build
+                    node_modules/.bin/netlify deploy --prod --dir build --message "Deployed from Jenkins commmit ${GIT_HASH}"
                 '''
             }
         }
