@@ -6,6 +6,7 @@ pipeline {
         GIT_HASH = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim().take(7)
         NETLIFY_SITE_ID = "fe19abea-7574-467e-a119-ab352269de48"
         NETLIFY_AUTH_TOKEN = credentials('netlify-token')
+        REACT_APP_VERSION = "1.0.0"
     }
 
     stages {
